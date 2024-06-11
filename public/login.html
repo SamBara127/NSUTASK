@@ -35,7 +35,7 @@
                 <input type="password" id="auth-login_password" name="auth-login_password" placeholder="Пароль" required>
             </label>
 
-            <input type="submit" onclick="event.preventDefault(); login()" value="Войти">
+            <input type="submit" class="green_standart_button" onclick="event.preventDefault(); login()" value="Войти">
             <a href="#" onclick="toggleLoginRegister()">У меня нет учётной записи</a>
         </form>
     </section>
@@ -54,10 +54,12 @@
             </label>
 
             <label>[ОТЛАДКА] Оператор?
-                <input type="checkbox" id="auth-register_role" name="newRole">
+                <input type="checkbox" id="checkbox" class="custom-checkbox" id="auth-register_role" name="newRole">
+                <label for="checkbox"></label>
             </label>
+            
 
-            <input type="submit" onclick="event.preventDefault(); register()" value="Зарегистрироваться">
+            <input type="submit" class="green_standart_button" onclick="event.preventDefault(); register()" value="Зарегистрироваться">
             <a href="#" onclick="toggleLoginRegister()">У меня есть учётная запись</a>
         </form>
     </section>

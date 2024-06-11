@@ -23,16 +23,15 @@
 </head>
 <body>
 
-<main id="nsutask" class="flex-fullcol blur-behind">
+<main id="nsutask" class="flex-fullcol blur-behind hidden">
     <header id="groupinfo-wrapper">
         <div class="boardman-spacer"></div>
         <div id="groupinfo">
             <div class="flex-center">
                 <button class="groupinfo__button" onclick="toggleBoardmanView()">&#9776</button>
-                <div id="groupinfo-actions" class="flex-center for-operator">
-                    <!-- Изменённые кнопки -->
-                    <button id="new-task-button" onclick="tasklistNewTask()">Добавить Задачу</button>
-                    <button id="members-button" onclick="boardmanBoardMembers()">Список Участников</button>
+                <div id="groupinfo-actions" class="flex-center for-operator hidden">
+                    <button id="groupinfo-actions__newtask-btn" onclick="tasklistNewTask()">➕&nbsp;Новая&nbsp;задача</span>
+                    <button id="groupinfo-actions__members-btn" onclick="boardmanBoardMembers()">👯&nbsp;Участники</span>
                 </div>
             </div>
             <h2 id="groupinfo__title" class="text-clip">NSUTASK</h2>
@@ -45,7 +44,7 @@
 
     <div id="tasklist-wrapper">
         <div class="boardman-spacer"></div>
-        <div id="tasklist"><h1 class="tasklist-placeholder">⌛ Загрузка…</h1></div>
+        <div id="tasklist"><h1 class="tasklist-placeholder">⌛ Загрузка…</div>
         <div class="taskman-spacer closed"></div>
     </div>
 
@@ -53,29 +52,28 @@
         <div class="for-operator">
             <h3 style="margin-bottom: var(--gap-small);">Управление досками:</h3>
             <div class="flex-fullrow" style="gap: var(--gap-small);">
-                <!-- Изменённые кнопки -->
-                <button id="create-board-button" onclick="boardmanNewBoard()">Создать Новую Доску</button>
-                <button id="edit-board-button" onclick="boardmanEditBoard()">Изменить Доску</button>
-                <button id="delete-board-button" onclick="boardmanDeleteBoard()">Удалить Доску</button>
+                <button id="boardman-actions__create-btn" onclick="boardmanNewBoard()">Создать</button>
+                <button id="boardman-actions__edit-btn" onclick="boardmanEditBoard()" disabled>Изменить</button>
+                <button id="boardman-actions__delete-btn" onclick="boardmanDeleteBoard()" disabled>Удалить</button>
             </div>
             <hr>
         </div>
         <div id="boardman" class="flex-fullcol">Получение списка досок…</div>
     </aside>
 
-    <aside id="taskman" class="flex-fullcol">
-        <button class="red-image-button" onclick="closeTaskmanView()">Закрыть</button>
+    <aside id="taskman" class="flex-fullcol closed">
+        <button onclick="closeTaskmanView()">Закрыть</button>
         <div id="taskman-taskinfo">
             Получение информации о задаче…
         </div>
         <hr>
-        <div class="text_labels">
+        <div id="taskman-tasksubmits">
             Получение информации о посылках…
         </div>
         <div id="taskman-actions" class="flex-fullcol">
             <textarea id="taskman-actions__submit-body" placeholder="Введите или вставьте сюда текст посылки"></textarea>
-            <button class="green-image-button" onclick="taskmanSendSubmit()">Отправить</button>
-            <button class="red-image-button" onclick="taskmanDeleteSubmit()">Удалить</button>
+            <button id="taskman-actions__btn-submit" onclick="taskmanSendSubmit()">Отправить</button>
+            <button id="taskman-actions__btn-delete" onclick="taskmanDeleteSubmit()">Удалить</button>
         </div>
     </aside>
 </main>
@@ -83,5 +81,6 @@
 <dialog class="card-adaptive" id="test">
     adasdasd
 </dialog>
+
 </body>
 </html>
