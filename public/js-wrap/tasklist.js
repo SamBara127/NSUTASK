@@ -333,7 +333,7 @@ function tasklistSubmitsPanel(taskId) {
                     const statusFormData = [
                         { name: `<h2>Посылка от ${submitData.display_name} (${submitData.username})`, type: 'custom' },
                         { name: `<i>Дата отправления: ${ISOtoDDMMYY(submitData.date_submitted)}</i>`, type: 'custom' },
-                        { name: `<p>${submitData.text}</p>`, type: 'custom' },
+                        { name: `<pre>${submitData.text}</pre>`, type: 'custom' },
                         { name: '<br><i>Выберите статус посылки:</i>', type: 'custom' },
                         { name: '🏆 ПРИНЯТО!', type: 'radio', defaultValue: (submitData.status === 'accepted'), allowEmpty: false },
                         { name: '🗿 Отклонено', type: 'radio', defaultValue: (submitData.status === 'rejected'), allowEmpty: false },

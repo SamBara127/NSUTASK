@@ -35,7 +35,7 @@ function taskmanGetInfo(taskId, submitStatus) {
         taskTitle.innerText = data.title;
         taskInfo.appendChild(taskTitle);
 
-        const taskBody = document.createElement('p');
+        const taskBody = document.createElement('pre');
         taskBody.innerText = data.body;
         taskInfo.appendChild(taskBody);
 
@@ -101,7 +101,7 @@ function taskmanGetInfo(taskId, submitStatus) {
                 }
                 taskSubmits.appendChild(submitStatusContainer);
 
-                const submitTextContainer = document.createElement('p');
+                const submitTextContainer = document.createElement('pre');
                 submitTextContainer.className = 'taskman__tasksubmit-text';
                 submitTextContainer.innerText = submitText;
                 taskSubmits.appendChild(submitTextContainer);
