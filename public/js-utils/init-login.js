@@ -17,7 +17,12 @@ function initLayout() {
         else {
             document.querySelector('#login').classList.remove('hidden');
         }
-    })
+    });
+
+    // Нескучные обои!
+    const wallpapers = ['bg-grass.jpeg', 'bg-leaves.jpeg', 'bg-mesa.jpeg', 'bg-sea.jpeg'];
+    const wallpaperChoice = Math.floor(Math.random() * wallpapers.length);
+    document.querySelector('body').style.backgroundImage = `url('../assets/${wallpapers[wallpaperChoice]}')`;
 }
 
 

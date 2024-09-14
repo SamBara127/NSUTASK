@@ -1,0 +1,128 @@
+html {
+    --bg-card: #eeec;
+    --bg-card-emphasis: #2222;
+
+    --card-action-bg: #fffc;
+    --card-action-bg-hover: #fff;
+    --card-action-bg-active: #eee;
+    --card-action-bg-selected: #ddd;
+    --card-action-color: var(--text-black);
+    --card-action-color-selected: var(--text-black-pale);
+
+    --card-input-bg: #fff;
+    --card-input-color: var(--text-black);
+    --card-input-border: 2px solid #aaa;
+    --card-input-border-hover: 2px solid #888;
+    --card-input-border-selected: 2px solid #666;
+}
+
+
+
+::backdrop {
+    backdrop-filter: blur(calc(var(--blur-backdrop-bg) / 2));
+    transition: var(--transition-slow);
+}
+
+.card-adaptive, .card {
+    background: var(--bg-card);
+    margin: var(--gap-small) auto; padding: var(--gap-big);
+    border-radius: var(--rounding-regular);
+    box-shadow: var(--shadow-emphasis-low);
+    outline: none;
+    border: none;
+}
+@media screen and (min-width: 721px) {
+    .card-adaptive {
+        min-width: 480px;
+        margin: var(--gap-big) auto;
+    }
+}
+.card {
+    display: flex; justify-content: start;
+    margin: var(--gap-small); padding: var(--gap-small);
+}
+
+#modalman {
+    gap: var(--gap-small);
+}
+#modalman-actions {
+    margin: var(--gap-big) calc(-1 * var(--gap-big)) calc(-1 * var(--gap-big));
+    padding: var(--gap-big);
+    border-top: 2px solid var(--bg-card-emphasis);
+    background: var(--bg-card-emphasis);
+}
+#modalman-actions > * {
+    flex: 1 1 100%;
+}
+
+.card input[type="text"], .card-adaptive input[type="text"], dialog input[type="text"],
+.card input[type="number"], .card-adaptive input[type="number"], dialog input[type="number"],
+.card input[type="password"], .card-adaptive input[type="password"], dialog input[type="password"],
+.card input[type="date"], .card-adaptive input[type="date"], dialog input[type="date"],
+.card textarea, .card-adaptive textarea, dialog textarea {
+    width: 100%;
+    background: var(--card-input-bg); color: var(--card-input-color);
+    border: var(--card-input-border); border-radius: var(--rounding-small);
+    outline: none;
+    box-sizing: border-box;
+    resize: vertical;
+}
+.card input[type="text"]:hover, .card-adaptive input[type="text"]:hover, dialog input[type="text"]:hover,
+.card input[type="number"]:hover, .card-adaptive input[type="number"]:hover, dialog input[type="number"]:hover,
+.card input[type="password"]:hover, .card-adaptive input[type="password"]:hover, dialog input[type="password"]:hover,
+.card input[type="date"]:hover, .card-adaptive input[type="date"]:hover, dialog input[type="date"]:hover,
+.card textarea:hover, .card-adaptive textarea:hover, dialog textarea:hover {
+    border: var(--card-input-border-hover);
+}
+.card input[type="text"]:active, .card-adaptive input[type="text"]:active, dialog input[type="text"]:active,
+.card input[type="number"]:active, .card-adaptive input[type="number"]:active, dialog input[type="number"]:active,
+.card input[type="password"]:active, .card-adaptive input[type="password"]:active, dialog input[type="password"]:active,
+.card input[type="date"]:active, .card-adaptive input[type="date"]:active, dialog input[type="date"]:active,
+.card textarea:active, .card-adaptive textarea:active, dialog textarea:active {
+    border: var(--card-input-border-selected);
+}
+
+.card input[type="checkbox"], .card-adaptive input[type="checkbox"], dialog input[type="checkbox"] {
+    margin-right: var(--gap-small);
+}
+
+.card input[type="radio"], .card-adaptive input[type="radio"], dialog input[type="radio"] {
+    margin: 0 var(--gap-medium) 0 var(--gap-small);
+}
+.card label:has(input[type="radio"]), .card-adaptive label:has(input[type="radio"]), dialog label:has(input[type="radio"]) {
+    margin: -5px 0; padding: var(--gap-small);
+    background: var(--card-action-bg);
+    border: 2px solid var(--card-action-bg);
+}
+.card label:has(input[type="radio"]):hover, .card-adaptive label:has(input[type="radio"]):hover, dialog label:has(input[type="radio"]):hover {
+    background: var(--card-action-bg-hover);
+}
+.card label:has(input[type="radio"]):first-of-type, .card-adaptive label:has(input[type="radio"]):first-of-type, dialog label:has(input[type="radio"]):first-of-type {
+    border-top-left-radius: var(--rounding-regular);
+    border-top-right-radius: var(--rounding-regular);
+}
+.card label:has(input[type="radio"]):last-of-type, .card-adaptive label:has(input[type="radio"]):last-of-type, dialog label:has(input[type="radio"]):last-of-type {
+    border-bottom-left-radius: var(--rounding-regular);
+    border-bottom-right-radius: var(--rounding-regular);
+}
+
+.card button, .card-adaptive button, dialog button,
+.card input[type="submit"], .card-adaptive input[type="submit"], dialog input[type="submit"] {
+    background: var(--card-action-bg); color: var(--card-action-color);
+    border: none; border-radius: var(--rounding-small);
+    cursor: pointer;
+}
+.card button:hover, .card-adaptive button:hover, dialog button:hover,
+.card input[type="submit"]:hover, .card-adaptive input[type="submit"]:hover, dialog input[type="submit"]:hover {
+    background: var(--card-action-bg-hover);
+}
+.card button:active, .card-adaptive button:active, dialog button:active,
+.card input[type="submit"]:active, .card-adaptive input[type="submit"]:active, dialog input[type="submit"]:active {
+    background: var(--card-action-bg-active); color: var(--card-action-color-selected);
+}
+
+.card p, .card-adaptive p, dialog p {
+    margin: -5px 0; padding: var(--gap-small);
+    background: var(--bg-card-emphasis);
+    border-radius: var(--rounding-regular);
+}

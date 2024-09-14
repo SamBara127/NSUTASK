@@ -59,22 +59,6 @@ html {
 
 
 
-.task-actions {
-	margin-top: var(--gap-medium);
-	display: flex;
-	margin: var(--gap-medium) -10px -10px;
-    gap: var(--gap-tiny);
-}
-
-.task-actions button {
-    width: 100%;
-    border-radius: var(--rounding-small);
-}
-
-
-
-
-
 #tasklist-wrapper {
     flex: 1 1 auto;
     display: flex; flex-direction: row;
@@ -114,7 +98,7 @@ html {
 .taskcat-header {
     display: flex;
     justify-content: space-between;
-    padding: calc(var(--gap-medium) - var(--gap-tiny)) var(--gap-medium) var(--gap-medium);
+    padding: 8px var(--gap-medium);
     color: var(--text-white);
 }
 .taskcat:hover .taskcat-header {
@@ -128,8 +112,8 @@ html {
 }
 
 .taskcat-content {
-    max-height: calc(100% - 44px);
-    overflow: hidden scroll
+    max-height: calc(100% - 32px);
+    overflow: hidden scroll;
 }
 
 .task-content {
@@ -150,7 +134,7 @@ html {
 
 
 .task {
-    margin-bottom: 2px; padding: var(--gap-medium);
+    margin-bottom: 2px;
     background-color: var(--bg-task);
     cursor: pointer;
     transition: background-color var(--transition-fast);
@@ -167,9 +151,22 @@ html {
     margin-bottom: var(--gap-small);
 }
 
-.task-header, .task-content {
+.task-content {
+    padding: var(--gap-medium);
     cursor: pointer;
     /*user-select: none;*/
+}
+
+.task-actions {
+	display: flex;
+	margin-top: calc(-1 * var(--gap-small));
+    padding: var(--gap-tiny);
+    gap: var(--gap-tiny);
+}
+
+.task-actions button {
+    width: 100%;
+    border-radius: var(--rounding-small);
 }
 
 

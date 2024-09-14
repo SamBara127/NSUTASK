@@ -8,7 +8,6 @@ html {
     --brand-main: #ffe4cf;
     --bg-main: var(--brand-main);
     --bg-image-mask: #4448;
-    --bg-card: #fffc;
 
     --text-white: #fff;
     --text-white-pale: #fff8;
@@ -32,12 +31,8 @@ html {
 body {
     margin: 0; padding: 0;
     box-sizing: border-box;
-    font-size: 14px; font-family: sans-serif;
-    
-    background: url('../assets/bg-grass.jpg') var(--bg-main);
-    background-size: cover;
-    background-position: center center;
-    color: var(--text-main);
+    background: var(--bg-main); color: var(--text-main);
+    background-size: cover; background-position: center center;
 }
 
 main {
@@ -167,14 +162,22 @@ main {
 
 
 
-button,
-input:not([type="checkbox"], input[type="radio"]),
-textarea {
-    min-height: 32px;
+body, input, textarea, select, button {
+    font-size: 14px; font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
 }
 
 h1, h2, h3, p, span {
     margin: 0; padding: 0;
+}
+
+button,
+input:not([type="checkbox"], input[type="radio"]),
+textarea {
+    min-height: 32px;
 }
 
 hr {
@@ -222,36 +225,5 @@ hr {
 @media screen and (min-width: 721px) {
     .hidden-mediaBig {
         display: none !important;
-    }
-}
-
-
-
-::backdrop {
-    backdrop-filter: blur(calc(var(--blur-backdrop-bg) / 2));
-}
-
-.card {
-    display: flex; justify-content: start;
-    background: var(--bg-card);
-    margin: var(--gap-small); padding: var(--gap-small);
-    border-radius: var(--rounding-regular);
-    box-shadow: var(--shadow-emphasis-low);
-    outline: none;
-    border: none;
-}
-
-.card-adaptive {
-    background: var(--bg-card);
-    margin: var(--gap-small) auto; padding: var(--gap-big);
-    border-radius: var(--rounding-regular);
-    box-shadow: var(--shadow-emphasis-low);
-    outline: none;
-    border: none;
-}
-@media screen and (min-width: 721px) {
-    .card-adaptive {
-        min-width: 480px;
-        margin: var(--gap-big) auto;
     }
 }

@@ -73,7 +73,10 @@ router.getRole = (req, res) => {
         `SELECT role FROM users WHERE id = ?`,
         [userId],
         (err, row) => {
+            //console.log(row);
             if (err) { return res.status(500).json({ message: err.message }); }
+
+            if (!row) { return res.status(200).json({ role: undefined }) };
 
             return res.status(200).json({ role: row.role });
         }

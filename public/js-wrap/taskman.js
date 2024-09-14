@@ -35,7 +35,7 @@ function taskmanGetInfo(taskId, submitStatus) {
         taskTitle.innerText = data.title;
         taskInfo.appendChild(taskTitle);
 
-        const taskBody = document.createElement('p');
+        const taskBody = document.createElement('pre');
         taskBody.innerText = data.body;
         taskInfo.appendChild(taskBody);
 
@@ -45,7 +45,7 @@ function taskmanGetInfo(taskId, submitStatus) {
         if (data.date_due !== null) {
             const taskDueDate = ISOtoDDMMYY(data.date_due);
             taskDue.innerText = `Срок сдачи: ДО ${taskDueDate} (не включительно)`;
-            
+
             if (checkIfOutdated(data.date_due)) {
                 taskDue.classList.add('task-outdated');
             }
@@ -101,7 +101,7 @@ function taskmanGetInfo(taskId, submitStatus) {
                 }
                 taskSubmits.appendChild(submitStatusContainer);
 
-                const submitTextContainer = document.createElement('p');
+                const submitTextContainer = document.createElement('pre');
                 submitTextContainer.className = 'taskman__tasksubmit-text';
                 submitTextContainer.innerText = submitText;
                 taskSubmits.appendChild(submitTextContainer);
@@ -110,7 +110,7 @@ function taskmanGetInfo(taskId, submitStatus) {
         }
         else {
             taskSubmits.innerHTML = '<span class="pale">Вы ещё не отправляли посылку для этой задачи&nbsp;— <br>самое время отправить!</p>';
-            
+
             document.querySelector('#taskman-actions__submit-body').classList.remove('hidden');
             document.querySelector('#taskman-actions__btn-submit').classList.remove('hidden');
         }
@@ -133,6 +133,7 @@ function taskmanSendSubmit() {
     .then(response => response.json())
     .then(data => {
         if (data.message !== undefined) { alert(data.message); }
+
         else {
             alert('Посылка успешно отправлена!');
             document.querySelector('#taskman-actions__submit-body').value = '';
@@ -146,20 +147,22 @@ function taskmanSendSubmit() {
 function taskmanDeleteSubmit() {
     const token = getToken();
 
-    fetch(`../api/board${currentBoard}/task${currentTask}/submit`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message !== undefined) { alert(data.message); }
-        else {
-            //alert('Посылка успешно удалена.');
-            updateTasklist();
-            taskmanGetInfo(currentTask);
-        }
-    })
-    .catch(error => console.error(error));
+    if (confirm('Вы уверены, что хотите удалить посылку?')) {
+        fetch(`../api/board${currentBoard}/task${currentTask}/submit`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message !== undefined) { alert(data.message); }
+
+            else {
+                updateTasklist();
+                taskmanGetInfo(currentTask);
+            }
+        })
+        .catch(error => console.error(error));
+    }
 }
