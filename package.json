@@ -1,0 +1,30 @@
+{
+  "name": "nsutask-new",
+  "version": "0.0.1",
+  "description": "Simple collaborative kanban board for students and teachers",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js",
+    "serve": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NSUTASK/NSUTASK.git"
+  },
+  "keywords": [
+    "NSUTASK"
+  ],
+  "author": "Владимир Чеховский",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NSUTASK/NSUTASK/issues"
+  },
+  "homepage": "https://github.com/NSUTASK/NSUTASK#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.4",
+    "sqlite3": "^5.1.7"
+  }
+}
