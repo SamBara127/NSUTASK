@@ -31,6 +31,22 @@ function taskmanGetInfo(taskId, submitStatus) {
         taskInfo.innerHTML = '';
         taskSubmits.innerHTML = '';
 
+        // Проверяем наличие файла
+        const taskDownload = document.getElementById('taskman-file');
+        const taskDownloadFilename = document.getElementById('taskman-file__filename');
+        // const taskDownloadButton = document.getElementById('taskman-file__btn-download');
+
+        if (data.file_name == null) {
+            taskDownload.style.display = 'none'; // Скрываем, если файл не найден
+        } else {
+            taskDownload.style.display = 'unset'; // Показываем блок файла
+            taskDownloadFilename.innerText = `Файл: ${data.file_name}`; // Обновляем имя файла
+            // taskDownloadButton.onclick = () => {
+            //     window.location.href = `../api/board${currentBoard}/task/${taskId}/download`; // Обновляем ссылку для скачивания
+            // };
+        }
+        // console.log("BEEEEEEEP!!!!");
+
         const taskTitle = document.createElement('h1');
         taskTitle.innerText = data.title;
         taskInfo.appendChild(taskTitle);

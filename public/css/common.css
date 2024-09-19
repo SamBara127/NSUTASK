@@ -73,6 +73,34 @@ main {
     background-size: contain;
 }
 
+.purple-image-button {
+    background: url('../buttons/purple_b.png') no-repeat !important;
+    width: 154px; /* ширина изображения */
+    height: 60px; /* высота изображения */
+    border: none;
+    cursor: pointer;
+    background-size: contain;
+    position: relative; /* или relative, fixed, если нужно */
+    /* top: 0px; */
+    /* left: 135px; */
+    left: 10px;
+    font-size: 25px;
+    font-family: 'Times New Roman', serif, sans-serif;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+    padding: 0;
+}
+
+.purple-image-button:hover {
+    background: url('../buttons/purple_ac.png') no-repeat !important;
+    background-size: contain;
+}
+
+.purple-image-button:active {
+    background: url('../buttons/purple_click.png') no-repeat !important;
+    background-size: contain;
+}
 
 .green-image-button {
     background: url('../buttons/green_b.png') no-repeat !important;

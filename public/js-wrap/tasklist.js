@@ -152,6 +152,18 @@ function createTasklistTask(taskData, submitData) {
     taskTitle.innerText = taskData.title;
     taskContent.appendChild(taskTitle);
 
+    if (taskData.file_name !== null)
+    {
+        const taskImageFile = document.createElement('img'); // Создаем элемент img
+        taskImageFile.src = '../buttons/src_file.png'; // Указываем путь к изображению
+        taskImageFile.style.width = '30px'; // Пример: устанавливаем ширину изображения
+        taskImageFile.style.height = 'auto'; // Пример: высота будет автоматически подстраиваться
+        // Добавляем отступы
+        taskImageFile.style.marginTop = '-25px';
+        taskImageFile.style.marginLeft = '250px';
+        taskContent.appendChild(taskImageFile); // Добавляем изображение в taskContent или другой контейнер
+    }
+
     const taskText = document.createElement('p');
     taskText.className = 'task-content__text text-clip';
     taskText.innerText = taskData.body;
@@ -160,7 +172,7 @@ function createTasklistTask(taskData, submitData) {
     const taskDue = document.createElement('i');
     taskDue.className = 'task-content__due';
 
-    if (taskData.date_due !== null) {
+    if (taskData.date_due !== 'null') {
     const taskDueDate = ISOtoDDMMYY(taskData.date_due);
         taskDue.innerText = `Срок сдачи: ДО ${taskDueDate}`;
 

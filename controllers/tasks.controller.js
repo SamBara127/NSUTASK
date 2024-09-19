@@ -155,16 +155,16 @@ router.editTaskInfo = (req, res) => {
                 const { title, body, dateDue } = req.body;
 
                 const dateCreated = new Date().toISOString();
-                if (dateDue && isNaN(new Date(dateDue))) {
+                if (dateDue !== 'null' && isNaN(new Date(dateDue))) {
                     return res.status(400).json({ message: 'Некорретный формат даты срока выполнения.' });
                 }
-                if (dateDue && (new Date(dateDue) < (new Date(dateCreated) - 2048000000))) {
+                if (dateDue !== 'null' && (new Date(dateDue) < (new Date(dateCreated) - 2048000000))) { 
                     return res.status(400).json({ message: 'Дата срока выполнения не может быть в прошлом.' });
                 }
 
                 // Получаем текущий путь к файлу для удаления, если требуется
                 dataDb.get(
-                    `SELECT file_path FROM tasks WHERE id = ?`,
+                    `SELECT file_path, file_name FROM tasks WHERE id = ?`,
                     [taskId],
                     (err, taskRow) => {
                         if (err) {
@@ -174,35 +174,47 @@ router.editTaskInfo = (req, res) => {
                         const oldFilePath = taskRow ? taskRow.file_path : null;
                         const oldFileName = taskRow ? taskRow.file_name : null;
 
-                        // Если был загружен новый файл, формируем новый путь
-                        const filePath = req.file ? path.join('uploads', boardId, req.file.filename) : oldFilePath;
-                        const filename_original = req.file ? req.file.originalname : oldFileName;
-                        // if (filePath == null) console.log('НЕТУ ФАЙЛА!!!'); else console.log('ОБНАРУЖЕН ФАЙЛ!!! -> ', filePath);
-                        console.log(oldFilePath);
+                        // Проверяем, был ли загружен новый файл
+                        let filePath = oldFilePath;
+                        let filename_original = oldFileName;
+                        
+                        if (req.file) {
+                            filePath = path.join('uploads', boardId, req.file.filename);
+                            filename_original = req.file.originalname;
+                        }
+
+                        // Формируем SQL-запрос динамически
+                        let sql = `UPDATE tasks SET title = ?, body = ?, date_due = ?`;
+                        const params = [title, body, dateDue];
+
+                        if (req.file) {
+                            sql += `, file_name = ?, file_path = ?`;
+                            params.push(filename_original, filePath);
+                        }
+
+                        sql += ` WHERE id = ?`;
+                        params.push(taskId);
+
                         // Обновляем информацию о задаче в базе данных
-                        dataDb.run(
-                            `UPDATE tasks SET title = ?, body = ?, date_due = ?, file_name = ?, file_path = ? WHERE id = ?`,
-                            [title, body, dateDue, filename_original, filePath, taskId],
-                            function (err) {
-                                if (err) {
-                                    return res.status(500).json({ message: err.message });
-                                }
-                                if (this.changes === 0) {
-                                    return res.status(404).json({ message: 'Такой задачи не существует.' });
-                                }
-
-                                // Удаляем старый файл, если был загружен новый
-                                if (req.file && oldFilePath) {
-                                    fs.unlink(oldFilePath, (err) => {
-                                        if (err) {
-                                            console.error('Ошибка при удалении старого файла:', err);
-                                        }
-                                    });
-                                }
-
-                                return res.status(200).json({ id: taskId });
+                        dataDb.run(sql, params, function (err) {
+                            if (err) {
+                                return res.status(500).json({ message: err.message });
                             }
-                        );
+                            if (this.changes === 0) {
+                                return res.status(404).json({ message: 'Такой задачи не существует.' });
+                            }
+
+                            // Удаляем старый файл, если был загружен новый
+                            if (req.file && oldFilePath) {
+                                fs.unlink(oldFilePath, (err) => {
+                                    if (err) {
+                                        console.error('Ошибка при удалении старого файла:', err);
+                                    }
+                                });
+                            }
+
+                            return res.status(200).json({ id: taskId });
+                        });
                     }
                 );
             }
