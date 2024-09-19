@@ -85,7 +85,9 @@ function getBoardData(board_id) {
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT NOT NULL,
                 body TEXT,
-                date_due TEXT
+                date_due TEXT,
+                file_name TEXT,
+                file_path TEXT
             )
         `);
         db.run(`
@@ -95,7 +97,9 @@ function getBoardData(board_id) {
                 user_id INTEGER NOT NULL,
                 date_submitted TEXT NOT NULL,
                 text TEXT,
-                status TEXT NOT NULL
+                status TEXT NOT NULL,
+                file_name TEXT,
+                file_path TEXT
             )
         `);
     });

@@ -1,14 +1,24 @@
 
-function showFileName() {
-    const fileInput = document.getElementById('fileInput');
+function showFileName(file_name) {
     const fileNameDisplay = document.getElementById('fileName');
 
-    if (fileInput.files.length > 0) {
-        fileNameDisplay.textContent = fileInput.files[0].name;
+    if (file_name.length > 0) {
+        fileNameDisplay.textContent = file_name;
     } else {
-        fileNameDisplay.textContent = "Файл не выбран";
+        // fileNameDisplay.textContent = "Файл не выбран";
+
+        const fileInput = document.getElementById('fileInput');
+
+        if (fileInput.files.length > 0) {
+            fileNameDisplay.textContent = fileInput.files[0].name;
+        } 
+        else 
+        {
+            fileNameDisplay.textContent = "Файл не выбран";
+        }
     }
 }
+
 
 
 ////////////////////////////////////////////////////////////////////
@@ -211,21 +221,32 @@ function tasklistNewTask() {
         { name: '<i>Оставьте пустым, чтобы сделать задачу бессрочной.</i>', type: 'custom' },
     ];
 
+    showFileName('');
+
     modalmanForm(formData, true)
     .then(formResults => {
         if (!formResults) { return; }
 
+        console.log('Полученная форма файла -> ', formResults[3]);
+
+        // Создаем объект FormData
+        const formData = new FormData();
+        formData.append('title', formResults[0]);
+        formData.append('body', formResults[1]);
+        formData.append('dateDue', formResults[2] || null);
+
+        // Получаем файл из fileInput
+        const fileInput = document.getElementById('fileInput');
+        if (fileInput.files.length > 0) {
+            formData.append('file', fileInput.files[0]); // Добавляем файл в FormData
+        }
+
         fetch(`../api/board${currentBoard}/tasks`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}` // Устанавливаем только заголовок авторизации
             },
-            body: JSON.stringify({
-                title: formResults[0],
-                body: formResults[1],
-                dateDue: formResults[2] || null
-            })
+            body: formData // Передаем FormData
         })
         .then(response => response.json())
         .then(data => {
@@ -237,6 +258,7 @@ function tasklistNewTask() {
     });
 }
 
+
 function tasklistEditTask(taskId) {
     const token = getToken();
 
@@ -247,7 +269,9 @@ function tasklistEditTask(taskId) {
     })
     .then(response => response.json())
     .then(data => {
-        //console.log(data);
+        console.log(data);
+        
+        // document.getElementById('fileName').value = data.file_name;
         const formData = [
             { name: '<h2>Изменение задачи</h2>', type: 'custom' },
             { name: 'Заголовок задачи', type: 'text', allowEmpty: false, defaultValue: data.title },
@@ -256,32 +280,44 @@ function tasklistEditTask(taskId) {
             { name: '<i>Оставьте пустым, чтобы сделать задачу бессрочной.</i>', type: 'custom' },
         ];
 
+        showFileName(data.file_name);
+
         modalmanForm(formData, true)
         .then(formResults => {
             if (!formResults) { return; }
 
+            // Создаем объект FormData для отправки формы
+            const formData = new FormData();
+            formData.append('title', formResults[0]);
+            formData.append('body', formResults[1]);
+            formData.append('dateDue', formResults[2] || null);
+
+            // Получаем файл из fileInput
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput && fileInput.files.length > 0) {
+                formData.append('file', fileInput.files[0]); // Добавляем файл в FormData
+            }
+
+            // Отправляем запрос на изменение задачи
             fetch(`../api/board${currentBoard}/task${taskId}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}` // Заголовок авторизации
                 },
-                body: JSON.stringify({
-                    title: formResults[0],
-                    body: formResults[1],
-                    dateDue: formResults[2] || null
-                })
+                body: formData // Передаем объект FormData
             })
             .then(response => response.json())
             .then(data => {
-                if (data.message !== undefined) { alert(data.message); }
-
+                if (data.message !== undefined) {
+                    alert(data.message);
+                }
                 updateTasklist();
             })
             .catch(error => console.error(error));
         });
     });
 }
+
 
 function tasklistDeleteTask(taskId) {
     const token = getToken();

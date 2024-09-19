@@ -72,14 +72,22 @@
             Получение информации о задаче…
         </div>
         <hr>
-        <div id="taskman-tasksubmits">
+        <div id="taskman-file" class="flex-fullrow"></div>
+            <h3 id="taskman-file__filename" style="margin-left: 10px;">Тут типа хоть че</h3>
+            <button id="taskman-file__btn-download" class="green-image-button" onclick="">Скачать</button>
+        </div>
+        <hr>
+        <div id="taskman-tasksubmits"></div>
             Получение информации о посылках…
         </div>
+        <hr>
         <div id="taskman-actions" class="flex-fullcol">
             <textarea id="taskman-actions__submit-body" placeholder="Введите или вставьте сюда текст посылки"></textarea>
             <button id="taskman-actions__btn-submit" class="green-image-button" onclick="taskmanSendSubmit()">Отправить</button>
             <button id="taskman-actions__btn-delete" class="red-image-button" onclick="taskmanDeleteSubmit()">Удалить</button>
         </div>
+        <!-- <hr> -->
+        
     </aside>
 </main>
 
@@ -93,7 +101,7 @@
         <br>
         <button type="button" onclick="document.getElementById('fileInput').click()">Прикрепить файл</button> <!-- Кнопка для выбора файла -->
         <span id="fileName" style="margin-left: 10px;">Файл не выбран</span> <!-- Поле для отображения имени файла -->
-        <input type="file" id="fileInput" style="display:none;" onchange="showFileName()"> <!-- Скрытое поле для выбора файла -->
+        <input type="file" id="fileInput" style="display:none;" onchange="showFileName('')"> <!-- Скрытое поле для выбора файла -->
     </div>
 
     <div id="modalman-actions" class="flex-fullrow">
