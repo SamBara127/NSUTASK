@@ -1,8 +1,10 @@
 
 function showFileName(file_name) {
     const fileNameDisplay = document.getElementById('fileName');
+    const file_delete = document.getElementById('fileDelete');
+    file_delete.style.display = 'unset';
 
-    if (file_name.length > 0) {
+    if (file_name === null) {
         fileNameDisplay.textContent = file_name;
     } else {
         // fileNameDisplay.textContent = "Файл не выбран";
@@ -14,11 +16,18 @@ function showFileName(file_name) {
         } 
         else 
         {
+            file_delete.style.display = 'none';
             fileNameDisplay.textContent = "Файл не выбран";
         }
     }
 }
 
+function deleteSelectedFile()
+{
+    document.getElementById('fileInput').value = null;
+    document.getElementById('fileName').textContent = "Файл не выбран";
+    document.getElementById('fileDelete').style.display = 'none';
+}
 
 
 ////////////////////////////////////////////////////////////////////
@@ -238,7 +247,7 @@ function tasklistNewTask() {
     modalmanForm(formData, true)
     .then(formResults => {
         if (!formResults) { return; }
-
+        
         console.log('Полученная форма файла -> ', formResults[3]);
 
         // Создаем объект FormData
@@ -297,7 +306,7 @@ function tasklistEditTask(taskId) {
         modalmanForm(formData, true)
         .then(formResults => {
             if (!formResults) { return; }
-
+            
             // Создаем объект FormData для отправки формы
             const formData = new FormData();
             formData.append('title', formResults[0]);

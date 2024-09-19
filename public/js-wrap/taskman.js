@@ -58,7 +58,7 @@ function taskmanGetInfo(taskId, submitStatus) {
         taskInfo.appendChild(document.createElement('br'));
 
         const taskDue = document.createElement('i');
-        if (data.date_due !== null) {
+        if (data.date_due !== 'null') {
             const taskDueDate = ISOtoDDMMYY(data.date_due);
             taskDue.innerText = `Срок сдачи: ДО ${taskDueDate} (не включительно)`;
 

@@ -29,7 +29,7 @@ function createFormElement(field) {
 
 // Основная функция для работы с модальным окном и формой
 function modalmanForm(formData, showUploadButton) {
-
+    
     // Находим кнопку для загрузки файлов
     const button_file = document.getElementById('modalman-files');
 

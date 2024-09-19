@@ -100,6 +100,7 @@
         <br>
         <button type="button" onclick="document.getElementById('fileInput').click()">Прикрепить файл</button> <!-- Кнопка для выбора файла -->
         <span id="fileName" style="margin-left: 10px;">Файл не выбран</span> <!-- Поле для отображения имени файла -->
+        <button type="button" id="fileDelete" style="float: right; display: none;" onclick="deleteSelectedFile()">Удалить файл</button>
         <input type="file" id="fileInput" style="display:none;" onchange="showFileName('')"> <!-- Скрытое поле для выбора файла -->
     </div>
 
