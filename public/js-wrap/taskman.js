@@ -1,4 +1,5 @@
 var currentTask = null;
+var currentFileName = null;
 
 function openTaskmanView() {
     document.querySelectorAll(".taskman-spacer").forEach(e => e.classList.remove('closed'));
@@ -41,6 +42,7 @@ function taskmanGetInfo(taskId, submitStatus) {
         } else {
             taskDownload.style.display = 'unset'; // Показываем блок файла
             taskDownloadFilename.innerText = `Файл: ${data.file_name}`; // Обновляем имя файла
+            currentFileName = data.file_name;
             // taskDownloadButton.onclick = () => {
             //     window.location.href = `../api/board${currentBoard}/task/${taskId}/download`; // Обновляем ссылку для скачивания
             // };
@@ -170,7 +172,7 @@ function taskmanDeleteSubmit() {
                 'Authorization': `Bearer ${token}`
             }
         })
-        .then(response => response.json())
+        .then(response => response.json()) // преобразование в json - json парсер
         .then(data => {
             if (data.message !== undefined) { alert(data.message); }
 
@@ -182,3 +184,37 @@ function taskmanDeleteSubmit() {
         .catch(error => console.error(error));
     }
 }
+
+
+function DownloadButton() { 
+
+    // const token = getToken();
+
+    fetch(`../api/board${currentBoard}/task${currentTask}/download`, {
+        method: 'GET',
+        // headers: {
+            // 'Authorization': `Bearer ${token}`
+        // }
+    })
+    .then(data => {
+        // console.log(data);
+        if (!data.ok) {
+            throw new Error('Ошибка при скачивании файла');
+        }
+        return data.blob(); // Преобразуем ответ в blob (файл)
+    })
+    .then(blob => {
+        const url = window.URL.createObjectURL(new Blob([blob])); // Создаем ссылку на blob-объект
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', currentFileName); // Имя файла (можно менять в зависимости от типа)
+        document.body.appendChild(link);
+        link.click();
+        link.remove(); // Убираем ссылку после скачивания
+    })
+    .catch(error => console.error('Ошибка:', error));
+    
+
+
+}
+

@@ -286,6 +286,43 @@ router.deleteTask = (req, res) => {
     );
 };
 
+// router.downloadTask = (req, res) => {
+//     console.log("I CATCHED YOUR REQUEST!!!!!, UUUUUUIIIIIIIIIIIII)))), I M SENDIND RESPONSE...");
+//     res.end("I CATCHED RESPONSE!!!!!, UUUUUUIIIIIIIIIIIII)))), GOOD JOB!");
+// }
+// Контроллер для скачивания файла по task_id
+router.downloadTask = (req, res) => {
+    const { board_id, task_id } = req.params;
+    const dataDb = DB.getBoardData(board_id);  // Предположим, что здесь ты работаешь с базой данных
+
+    // Находим информацию о задаче
+    dataDb.get(`SELECT file_path, file_name FROM tasks WHERE id = ?`, [task_id], (err, taskRow) => {
+        if (err) {
+            return res.status(500).json({ message: 'Ошибка при получении данных задачи.' });
+        }
+
+        if (!taskRow || !taskRow.file_path) {
+            return res.status(404).json({ message: 'Файл не найден для данной задачи.' });
+        }
+
+        const filePath = taskRow.file_path;
+        const fileName = taskRow.file_name;
+
+        // Проверяем, существует ли файл на сервере
+        fs.access(filePath, fs.constants.F_OK, (err) => {
+            if (err) {
+                return res.status(404).json({ message: 'Файл не найден на сервере.' });
+            }
+            
+            // Отправляем файл клиенту
+            res.download(filePath, fileName, (err) => {
+                if (err) {
+                    return res.status(500).json({ message: 'Ошибка при скачивании файла.' });
+                }
+            });
+        });
+    });
+};
 
 
 

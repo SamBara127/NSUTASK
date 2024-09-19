@@ -458,3 +458,33 @@ function tasklistSubmitsPanel(taskId) {
     })
     .catch(error => alert(error.message));
 }
+
+
+
+// document.getElementById('downloadButton').addEventListener('click', function() {
+//     const taskId = this.getAttribute('data-task-id');
+//     const boardId = this.getAttribute('data-board-id');
+
+//     fetch(`/api/board${boardId}/task${taskId}/download`, {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         }
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Ошибка при скачивании файла');
+//         }
+//         return response.blob(); // Преобразуем ответ в blob (файл)
+//     })
+//     .then(blob => {
+//         const url = window.URL.createObjectURL(new Blob([blob])); // Создаем ссылку на blob-объект
+//         const link = document.createElement('a');
+//         link.href = url;
+//         link.setAttribute('download', `task_${taskId}.zip`); // Имя файла (можно менять в зависимости от типа)
+//         document.body.appendChild(link);
+//         link.click();
+//         link.remove(); // Убираем ссылку после скачивания
+//     })
+//     .catch(error => console.error('Ошибка:', error));
+// });
