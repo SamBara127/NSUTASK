@@ -1,3 +1,18 @@
+
+function showFileName() {
+    const fileInput = document.getElementById('fileInput');
+    const fileNameDisplay = document.getElementById('fileName');
+
+    if (fileInput.files.length > 0) {
+        fileNameDisplay.textContent = fileInput.files[0].name;
+    } else {
+        fileNameDisplay.textContent = "Файл не выбран";
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////
+
 function createCategory(categoryId, categoryName) {
     const categoryContainer = document.createElement('section');
     categoryContainer.className = 'taskcat';
@@ -196,7 +211,7 @@ function tasklistNewTask() {
         { name: '<i>Оставьте пустым, чтобы сделать задачу бессрочной.</i>', type: 'custom' },
     ];
 
-    modalmanForm(formData)
+    modalmanForm(formData, true)
     .then(formResults => {
         if (!formResults) { return; }
 
@@ -241,7 +256,7 @@ function tasklistEditTask(taskId) {
             { name: '<i>Оставьте пустым, чтобы сделать задачу бессрочной.</i>', type: 'custom' },
         ];
 
-        modalmanForm(formData)
+        modalmanForm(formData, true)
         .then(formResults => {
             if (!formResults) { return; }
 
@@ -310,7 +325,7 @@ function tasklistSubmitsPanel(taskId) {
                 }))
             ];
 
-            modalmanForm(formData).then(formResults => {
+            modalmanForm(formData, false).then(formResults => {
                 if (!formResults) return;
 
                 const selectedSubmitIndex = formResults.findIndex(value => value === true);
@@ -340,7 +355,7 @@ function tasklistSubmitsPanel(taskId) {
                         { name: '🐝 На рассмотрении…', type: 'radio', defaultValue: (submitData.status === 'pending'), allowEmpty: false }
                     ];
 
-                    modalmanForm(statusFormData).then(statusFormResults => {
+                    modalmanForm(statusFormData, false).then(statusFormResults => {
                         if (!statusFormResults) { return };
 
                         const selectedStatusIndex = statusFormResults.findIndex(value => value === true);

@@ -16,7 +16,25 @@ function createFormElement(field) {
     return input;
 }
 
-function modalmanForm(formData) {
+function modalmanForm(formData, showUploadButton) {
+
+    const button_file = document.getElementById('modalman-files');
+
+    // showUploadButton = 1;
+
+    if (!showUploadButton) // undefined -> bool(false)
+    {
+        button_file.style.display = 'none';
+    } 
+    else
+    {
+        const value_file = document.getElementById('fileInput');
+        value_file.value = "";
+        showFileName();
+
+        button_file.style.display = 'unset';
+    }
+
     return new Promise((resolve) => {
         const modalman = document.getElementById('modalman');
         const uname = Math.floor(Math.random() * 100000); // Уникальный временный name для радио-кнопок

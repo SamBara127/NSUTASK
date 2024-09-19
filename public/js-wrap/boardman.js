@@ -87,7 +87,7 @@ function boardmanNewBoard() {
         { name: 'Запретить сдачу посылок после истечения даты', type: 'checkbox', allowEmpty: true },
     ];
 
-    modalmanForm(formData)
+    modalmanForm(formData, false)
     .then(formResults => {
         if (!formResults) { return; }
 
@@ -142,7 +142,7 @@ function boardmanEditBoard() {
             { name: 'Запретить сдачу посылок после истечения даты', type: 'checkbox', defaultValue: data.config.submits_strict_due_date, allowEmpty: true },
         ];
 
-        modalmanForm(formData)
+        modalmanForm(formData, false)
         .then(formResults => {
             if (!formResults) { return; }
 
@@ -244,7 +244,7 @@ function boardmanBoardMembers() {
                 { name: '➕ Новый участник', type: 'radio', value: 'new', allowEmpty: false }
             ];
 
-            modalmanForm(formData).then(formResults => {
+            modalmanForm(formData, false).then(formResults => {
                 if (!formResults) { return };
 
                 const selectedIndex = formResults.findIndex(value => value === true);
@@ -284,7 +284,7 @@ function boardmanBoardMembers() {
                             }))
                         ];
 
-                        modalmanForm(searchResultsForm).then(searchResults => {
+                        modalmanForm(searchResultsForm, false).then(searchResults => {
                             if (!searchResults) { return };
 
                             const selectedSearchIndex = searchResults.findIndex(value => value === true);

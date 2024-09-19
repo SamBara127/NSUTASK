@@ -67,7 +67,7 @@
     </aside>
 
     <aside id="taskman" class="flex-fullcol closed">
-        <button onclick="closeTaskmanView()">Закрыть</button>
+        <button class="red-image-button" onclick="closeTaskmanView()">Закрыть</button>
         <div id="taskman-taskinfo">
             Получение информации о задаче…
         </div>
@@ -77,8 +77,8 @@
         </div>
         <div id="taskman-actions" class="flex-fullcol">
             <textarea id="taskman-actions__submit-body" placeholder="Введите или вставьте сюда текст посылки"></textarea>
-            <button id="taskman-actions__btn-submit" onclick="taskmanSendSubmit()">Отправить</button>
-            <button id="taskman-actions__btn-delete" onclick="taskmanDeleteSubmit()">Удалить</button>
+            <button id="taskman-actions__btn-submit" class="green-image-button" onclick="taskmanSendSubmit()">Отправить</button>
+            <button id="taskman-actions__btn-delete" class="red-image-button" onclick="taskmanDeleteSubmit()">Удалить</button>
         </div>
     </aside>
 </main>
@@ -87,6 +87,15 @@
     <div id="modalman__content" class="flex-fullcol">
         Инициализация модальной формы…
     </div>
+
+    <div id="modalman-files">
+        <!-- <input type="file" id="modalman__file">Прикрепить Файл</input> -->
+        <br>
+        <button type="button" onclick="document.getElementById('fileInput').click()">Прикрепить файл</button> <!-- Кнопка для выбора файла -->
+        <span id="fileName" style="margin-left: 10px;">Файл не выбран</span> <!-- Поле для отображения имени файла -->
+        <input type="file" id="fileInput" style="display:none;" onchange="showFileName()"> <!-- Скрытое поле для выбора файла -->
+    </div>
+
     <div id="modalman-actions" class="flex-fullrow">
         <button id="modalman-actions__send">Отправить</button>
         <button id="modalman-actions__cancel">Закрыть</button>

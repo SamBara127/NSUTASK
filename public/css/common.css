@@ -43,7 +43,67 @@ main {
     gap: 0 !important;
 }
 
+/*////////////////////////////////////////////////////////////////////*/
+.red-image-button {
+    background: url('../buttons/red_b.png') no-repeat !important;
+    width: 165px; /* ширина изображения */
+    height: 68px; /* высота изображения */
+    border: none;
+    cursor: pointer;
+    background-size: contain;
+    position: relative; /* или relative, fixed, если нужно */
+    /* top: 0px; */
+    /* left: 135px; */
+    left: 10px;
+    font-size: 25px;
+    font-family: 'Times New Roman', serif, sans-serif;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+    padding: 0;
+}
 
+.red-image-button:hover {
+    background: url('../buttons/red_ac.png') no-repeat !important;
+    background-size: contain;
+}
+
+.red-image-button:active {
+    background: url('../buttons/red_click.png') no-repeat !important;
+    background-size: contain;
+}
+
+
+.green-image-button {
+    background: url('../buttons/green_b.png') no-repeat !important;
+    width: 165px; /* ширина изображения */
+    height: 68px; /* высота изображения */
+    border: none;
+    cursor: pointer;
+    background-size: contain;
+    position: relative; /* или relative, fixed, если нужно */
+    /* top: 0px; */
+    /* left: 135px; */
+    left: 10px;
+    font-size: 25px;
+    font-family: 'Times New Roman', serif, sans-serif;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+    padding: 0;
+}
+
+.green-image-button:hover {
+    background: url('../buttons/green_ac.png') no-repeat !important;
+    background-size: contain;
+}
+
+.green-image-button:active {
+    background: url('../buttons/green_click.png') no-repeat !important;
+    background-size: contain;
+}
+
+/*////////////////////////////////////////////////////////////////////*/
 
 body, input, textarea, select, button {
     font-size: 14px; font-family: 'Roboto', sans-serif;

@@ -31,30 +31,30 @@
 
     <section id="auth-login" class="card-adaptive flex-fullcol flex-center">
         <h2>Пожалуйста, войдите</h2>
-        <form name="auth-login" class="flex-fullcol">
+        <div name="auth-login" class="flex-fullcol">
             <label>
-                <input type="text" id="auth-login_login" name="auth-login_login" placeholder="Логин" required>
+                <input type="text" id="auth-login_login" placeholder="Логин" required>
             </label>
             <label>
-                <input type="password" id="auth-login_password" name="auth-login_password" placeholder="Пароль" required>
+                <input type="password" id="auth-login_password" placeholder="Пароль" required>
             </label>
 
-            <input type="submit" onclick="event.preventDefault(); login()" value="Войти">
+            <button class="green-image-button" onclick="login()">Войти</button>
             <a href="#" class="flex-center" onclick="toggleLoginRegister()">У меня нет учётной записи</a>
-        </form>
+        </div>
     </section>
 
     <section id="auth-register" class="card-adaptive flex-fullcol flex-center hidden">
         <h2>Добро пожаловать!</h2>
-        <form name="auth-register" class="flex-fullcol">
+        <div name="auth-register" class="flex-fullcol">
             <label>
-                <input type="text" id="auth-register_login" name="auth-register_login" placeholder="Логин" required>
+                <input type="text" id="auth-register_login" placeholder="Логин" required>
             </label>
             <label>
-                <input type="text" id="auth-register_displayname" name="auth-register_displayname" placeholder="Отображаемое имя" required>
+                <input type="text" id="auth-register_displayname" placeholder="Отображаемое имя" required>
             </label>
             <label>
-                <input type="password" id="auth-register_password" name="auth-register_password" placeholder="Пароль" required>
+                <input type="password" id="auth-register_password" placeholder="Пароль" required>
             </label>
 
             <label>
@@ -62,9 +62,9 @@
                 [ОТЛАДКА] Оператор?
             </label>
 
-            <input type="submit" onclick="event.preventDefault(); register()" value="Зарегистрироваться">
+            <button onclick="register()">Зарегистрироваться</button>
             <a href="#" class="flex-center" onclick="toggleLoginRegister()">У меня есть учётная запись</a>
-        </form>
+        </div>
     </section>
 </main>
 
